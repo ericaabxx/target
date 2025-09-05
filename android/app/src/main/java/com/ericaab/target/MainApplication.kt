@@ -1,4 +1,4 @@
-package com.target
+package com.ericaab.target
 
 import android.app.Application
 import android.content.res.Configuration
