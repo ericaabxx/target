@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { StatusBar, View } from 'react-native'
 import { HomeHeader } from "@/components/HomeHeader";
 import { Target } from "@/components/Target";
 import { List } from "@/components/List";
@@ -38,6 +38,7 @@ const targets = [
 export default function Index(){
     return(
         <View style={{ flex:1 }} >
+            <StatusBar barStyle="light-content" />
             <HomeHeader data={summary}/>
         
             <List 
