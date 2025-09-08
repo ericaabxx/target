@@ -14,6 +14,7 @@ export function Input({ label, ...rest }: Props) {
       <TextInput
         style={styles.input}
         placeholderTextColor={colors.gray[400]}
+        
         {...rest}
       />
     </View>
