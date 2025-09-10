@@ -20,7 +20,6 @@ export default function Transaction(){
         subtitle="A cada valor guardado você fica mais próximo da sua meta. Se esforce para guardar e evitar retirar."
       />
 
-        <Button title="Voltar" onPress={() => router.back()} />
         <View style={{ marginTop: 32, gap: 24 }}>
         <TransactionType selected={type} onChange={setType} />
         <CurrencyInput label="Valor (R$)" value={0} />
