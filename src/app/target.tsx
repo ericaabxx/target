@@ -5,6 +5,9 @@ import { Alert, View } from 'react-native'
 import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
 import { CurrencyInput } from '@/components/CurrencyInput'
+import { useTargetDatabase } from '@/database/useTargetDatabase'
+
+
 
 export default function Target() {
 const [isProcessing, setIsProcessing] = useState(false)
@@ -12,6 +15,7 @@ const [isProcessing, setIsProcessing] = useState(false)
   const [amount, setAmount] = useState(0)
 
   const params = useLocalSearchParams<{ id?: string }>()
+  const targetDatabase = useTargetDatabase()
 
   function handleSave() {
     if (!name.trim() || amount <= 0) {
@@ -32,6 +36,7 @@ const [isProcessing, setIsProcessing] = useState(false)
 
   async function create() {
     try {
+      await targetDatabase.create({ name, amount })
       Alert.alert('Nova Meta', 'Meta criada com sucesso!', [
         {
           text: 'Ok',
