@@ -35,8 +35,14 @@ function listBySavedValue() {
         SELECT
           targets.id,
           targets.name,
-          targets.amount
-        FROM targets
+          argets.amount,
+          COALESCE (SUM(transactions.amount), 0) AS current,
+          COALESCE ((SUM(transactions.amount) / targets.amount) * 100, 0) AS percentage
+          FROM targets
+          LEFT JOIN transactions ON targets.id = transactions.target_id
+          GROUP BY targets.id, targets.name, targets.amount
+          ORDER BY current DESC
+          FROM targets
       `)
   }
 
