@@ -1,6 +1,6 @@
 import { PageHeader } from '@/components/PageHeader'
 import { router, useLocalSearchParams } from 'expo-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Alert, View } from 'react-native'
 import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
@@ -34,6 +34,24 @@ const [isProcessing, setIsProcessing] = useState(false)
     }
   }
 
+  async function fetchDetails(id: number) {
+    try {
+      const response = await targetDatabase.show(id)
+      setName(response.name)
+      setAmount(response.amount)
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível carregar os detalhes da meta.')
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (params.id) {
+      fetchDetails(Number(params.id))
+    }
+  }, [params.id])
+
+  
   async function create() {
     try {
       await targetDatabase.create({ name, amount })
